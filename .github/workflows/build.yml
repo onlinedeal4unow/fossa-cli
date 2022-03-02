@@ -160,6 +160,10 @@ jobs:
       run: |
         cabal test --project-file=${{ matrix.project-file }} unit-tests
 
+    - name: Run fossa --version
+      run: |
+        cabal run version
+
     # Save artifacts.
     - name: Find and move binaries (Windows)
       if: ${{ contains(matrix.os, 'windows') }}
