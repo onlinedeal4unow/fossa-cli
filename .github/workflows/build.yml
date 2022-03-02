@@ -162,7 +162,7 @@ jobs:
 
     - name: Run fossa --version
       run: |
-        cabal run fossa -- --version
+        find . -type f -path '*/fossa/fossa.exe' -exec '{}' --version \;
 
     # Save artifacts.
     - name: Find and move binaries (Windows)
