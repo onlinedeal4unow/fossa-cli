@@ -143,6 +143,9 @@ jobs:
       run: |
         make build-test-data
 
+    - name: Confirm git status
+      run: git diff --exit-code
+
     - name: Build
       # Occasionally, we run out of memory on the build process.
       # Since cabal uses incremental compilation, we can retry from where we left off
