@@ -162,7 +162,7 @@ jobs:
 
     - name: Run fossa --version
       run: |
-        cabal run version
+        cabal run fossa -- --version
 
     # Save artifacts.
     - name: Find and move binaries (Windows)
