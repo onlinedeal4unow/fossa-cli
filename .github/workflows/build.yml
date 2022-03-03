@@ -160,9 +160,15 @@ jobs:
     - name: Confirm git status
       run: git diff
 
-    - name: Run fossa --version
+    - name: Run fossa --version (windows)
+      if: ${{ contains(matrix.os, 'windows') }}
       run: |
         find . -type f -path '*/fossa/fossa.exe' -exec '{}' --version \;
+
+    - name: Run fossa --version (non-windows)
+      if: ${{ !contains(matrix.os, 'windows') }}
+      run: |
+        find . -type f -path '*/fossa/fossa' -exec '{}' --version \;
 
     # Save artifacts.
     - name: Find and move binaries (Windows)
