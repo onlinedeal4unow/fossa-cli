@@ -158,7 +158,7 @@ jobs:
         cabal test --project-file=${{ matrix.project-file }} unit-tests
 
     - name: Confirm git status
-      run: git diff --exit-code
+      run: git diff
 
     - name: Run fossa --version
       run: |
