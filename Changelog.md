@@ -1,5 +1,8 @@
 # Fossa CLI Changelog
 
+## Unreleased
+- Respects Go module replacement directives in the Go Mod Graph strategy. ([#841](https://github.com/fossas/fossa-cli/pull/841)) 
+
 ## v3.1.4
 
 - Handles symlink loops in directory structure. ([#827](https://github.com/fossas/fossa-cli/pull/827))
