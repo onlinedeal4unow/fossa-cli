@@ -1,6 +1,6 @@
 # Fossa CLI Changelog
 
-## Unreleased
+## v3.1.5
 - Respects Go module replacement directives in the Go Mod Graph strategy. ([#841](https://github.com/fossas/fossa-cli/pull/841)) 
 
 ## v3.1.4
