@@ -80,6 +80,23 @@ func TestGradleDiscoverKotlin(t *testing.T) {
 	assert.True(t, moduleExists("discover-kotlin/grpc-xds", modules))
 }
 
+func TestGradleNewDiscovery(t *testing.T) {
+	modules, err := gradle.NewDiscover("testdata")
+	assert.Nil(t, err)
+	assert.Len(t, modules, 3)
+	assert.Equal(t, modules, map[string]map[string]string{
+		"testdata/discover-groovy": map[string]string{
+			"dependencies": "discover-groovy",
+		},
+		"testdata/discover-kotlin": map[string]string{
+			"dependencies": "discover-kotlin",
+		},
+		"testdata/discover-nested/nested": map[string]string{
+			"dependencies": "nested",
+		},
+	})
+}
+
 func TestGradleDiscoverNested(t *testing.T) {
 	modules, err := gradle.DiscoverWithCommand("testdata/discover-nested", make(map[string]interface{}), mockCommand("testdata/discover-nested/nested/gradle-tasks-all"))
 	assert.NoError(t, err)
