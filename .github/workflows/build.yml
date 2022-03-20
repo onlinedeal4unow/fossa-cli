@@ -90,10 +90,17 @@ jobs:
     # Github won't fix it, explanation here: https://github.com/actions/virtual-environments/issues/785#issuecomment-624073544
     # TODO: try removing this with GHC >= 9.0.1, once we can actually use it.
     # Potential GHC fix here (version 9.0.1/8.12.1): https://gitlab.haskell.org/ghc/ghc/-/merge_requests/3047
+
     - uses: al-cheb/configure-pagefile-action@v1.2
       if: ${{ contains(matrix.os, 'windows') }}
 
+
     - uses: actions/checkout@v2
+
+    - name: Print git stats 1
+      run: |
+        git log -1
+      if: ${{ contains(matrix.os, 'windows') }}
 
     # Install tools used in `vendor_download.sh`.
     - name: Install alpine binary dependencies
@@ -143,6 +150,13 @@ jobs:
       run: |
         make build-test-data
 
+    - name: Print git stats 2
+      run: |
+        git log -1
+        git status --porcelain
+        git status
+      if: ${{ contains(matrix.os, 'windows') }}
+
     - name: Build
       # Occasionally, we run out of memory on the build process.
       # Since cabal uses incremental compilation, we can retry from where we left off
@@ -152,6 +166,13 @@ jobs:
       run: |
         cabal update
         $RUN_CMD || $RUN_CMD
+
+    - name: Print git stats 3
+      run: |
+        git log -1
+        git status --porcelain
+        git status
+      if: ${{ contains(matrix.os, 'windows') }}
 
     - name: Run unit tests
       run: |
